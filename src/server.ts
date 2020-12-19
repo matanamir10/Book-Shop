@@ -1,3 +1,5 @@
+import path from "path";
+import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
@@ -24,6 +26,17 @@ export class ServerApp extends Server {
       })
     );
     this.setupControllers();
+
+    if (process.env.NODE_ENV === "production") {
+      this.app.use(
+        express.static(path.join(__dirname, "..", "client", "build"))
+      );
+      this.app.get("/*", (req, res) => {
+        res.sendFile(
+          path.join(__dirname, "..", "client", "build", "index.html")
+        );
+      });
+    }
     this.app.use(errorHandler);
   }
 

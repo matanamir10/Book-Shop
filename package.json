@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn src/index.ts"
+    "build": "tsc && cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start:dev": "concurrently \"ts-node-dev --respawn src/index.ts\" \"cd client && npm start\"",
+    "start:prod": "node build/index.js"
   },
   "keywords": [],
   "author": "",
