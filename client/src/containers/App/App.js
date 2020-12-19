@@ -12,6 +12,9 @@ const BookList = React.lazy(() => import("../../components/BookList/BookList"));
 const BookSearch = React.lazy(() =>
   import("../../components/BookSearch/BookSearch")
 );
+const CreateBook = React.lazy(() =>
+  import("../../components/CreateBook/CreateBook")
+);
 
 export const App = () => {
   const history = useHistory();
@@ -35,6 +38,12 @@ export const App = () => {
     </>
   );
   if (auth.isAuth) {
+    let createBookPermmisions = null;
+    if (auth.user.admin) {
+      createBookPermmisions = (
+        <Route path="/create-book" component={CreateBook} />
+      );
+    }
     app = (
       <>
         <Navigation />
@@ -43,6 +52,7 @@ export const App = () => {
             <Route path="/auth" component={Auth} />
             <Route path="/book-list" component={BookList} />
             <Route path="/book-search" component={BookSearch} />
+            {createBookPermmisions}
             <Redirect from="/" to="/book-list" />
           </Switch>
         </Suspense>
