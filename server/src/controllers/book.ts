@@ -121,7 +121,8 @@ export class BookController {
     const { id, book, author, publisher } = req.body;
     const newBook = await Book.findOneAndUpdate(
       { _id: id },
-      { $set: { book, author, publisher } }
+      { $set: { book, author, publisher } },
+      { new: true }
     );
     res.status(202).send(newBook);
   }
