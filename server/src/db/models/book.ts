@@ -4,14 +4,12 @@ interface BookAttrs {
   book: string;
   author: string;
   publisher: string;
-  userId: mongoose.Types.ObjectId;
 }
 
 interface BookDoc extends mongoose.Document {
   book: string;
   author: string;
   publisher: string;
-  userId: mongoose.Types.ObjectId;
 }
 
 interface BookModel extends mongoose.Model<BookDoc> {
