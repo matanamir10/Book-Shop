@@ -16,3 +16,39 @@ export const fetchBooks = () => {
     });
   };
 };
+
+export const createBook = (book) => {
+  return async (dispatch) => {
+    return new Promise((resolve) => {
+      axios.post("/books/create", book).then((data) => {
+        dispatch({
+          type: CREATE_BOOK,
+          book: data.newBook,
+        });
+        resolve();
+      });
+    });
+  };
+};
+
+export const deleteBook = (bookId) => {
+  return async (dispatch) => {
+    await axios.post("/books/delete", bookId);
+    dispatch({
+      type: DELETE_BOOK,
+      bookId,
+    });
+  };
+};
+
+// export const updateBook = (newBook) => {
+//   return async (dispatch) => {
+//     const { data: updatedBook } = await axios.post("/books/update", newBook);
+//     dispatch({
+//       type: UPDATE_BOOK,
+//       updatedBook,
+//     });
+//   };
+// };
+
+// TODO: Do search action
