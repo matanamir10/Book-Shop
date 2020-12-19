@@ -5,6 +5,9 @@ import morgan from "morgan";
 import "express-async-errors";
 import cookieSession from "cookie-session";
 import { Server } from "@overnightjs/core";
+import { errorHandler } from "./middlewares/errorHandler";
+import { AuthController } from "./controllers/auth";
+import { AppLogger } from "./models/Logger";
 
 export class ServerApp extends Server {
   constructor() {
@@ -20,11 +23,18 @@ export class ServerApp extends Server {
         httpOnly: true,
       })
     );
+    this.setupControllers();
+    this.app.use(errorHandler);
+  }
+
+  private setupControllers(): void {
+    const authController = new AuthController();
+    super.addControllers(authController);
   }
 
   public start(port: number): void {
     this.app.listen(port, () => {
-      console.log("started");
+      AppLogger.getLogger().info(`App running on port: ${port}`);
     });
   }
 }
