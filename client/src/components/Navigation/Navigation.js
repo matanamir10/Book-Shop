@@ -10,7 +10,7 @@ export const Navigation = () => {
   const { user } = useSelector((state) => state.auth);
   return (
     <nav className="navigation">
-      <p className="navigation__user-text">Hello, {user.userId}</p>
+      <p className="navigation__user-text">Hello, {user.email}</p>
       <NavLink
         className="navigation__item"
         activeClassName="navigation__item--active"
