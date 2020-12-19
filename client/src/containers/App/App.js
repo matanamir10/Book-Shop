@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import "./App.scss";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import Auth from "../Auth/Auth";
+import { Navigation } from "../../components/Navigation/Navigation";
+import { Loading } from "../../UI/Loading/Loading";
 import { autoAuthenticate } from "../../store/actions/auth";
+
+const BookList = React.lazy(() => import("../../components/BookList/BookList"));
+const BookSearch = React.lazy(() =>
+  import("../../components/BookSearch/BookSearch")
+);
 
 export const App = () => {
   const history = useHistory();
@@ -27,6 +34,21 @@ export const App = () => {
       <Redirect from="/" to="/auth" />
     </>
   );
-
+  if (auth.isAuth) {
+    app = (
+      <>
+        <Navigation />
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route path="/auth" component={Auth} />
+            <Route path="/book-list" component={BookList} />
+            <Route path="/book-search" component={BookSearch} />
+            <Redirect from="/" to="/book-list" />
+          </Switch>
+        </Suspense>
+        <ToastContainer />
+      </>
+    );
+  }
   return <div className="container">{app}</div>;
 };
