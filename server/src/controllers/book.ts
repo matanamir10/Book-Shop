@@ -28,6 +28,7 @@ export class BookController {
   @Get(":bookSearch")
   private async searchBooks(req: Request, res: Response) {
     const { bookSearch } = req.params;
+    // TODO: need to search by book
     console.log(bookSearch);
     const books = await Book.find({
       publisher: { $regex: `.*${bookSearch}.*` },
