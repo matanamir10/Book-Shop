@@ -32,11 +32,16 @@ export const createBook = (book) => {
 };
 
 export const deleteBook = (bookId) => {
+  console.log("bookId", bookId);
   return async (dispatch) => {
-    await axios.post("/api/books/delete", bookId);
-    dispatch({
-      type: DELETE_BOOK,
-      bookId,
+    return new Promise((resolve) => {
+      axios.delete(`/api/books/${bookId}`).then(() => {
+        dispatch({
+          type: DELETE_BOOK,
+          bookId,
+        });
+        resolve();
+      });
     });
   };
 };
