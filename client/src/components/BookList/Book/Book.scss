@@ -1,2 +1,21 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables.scss";
+
 .book {
+  @include flexCenter(column);
+  margin: 1.6rem;
+  width: 25rem;
+  max-width: 80%;
+  border: 2px solid $color-primary-dark;
+  cursor: pointer;
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &__card {
+    width: 100%;
+    height: 100%;
+  }
 }
