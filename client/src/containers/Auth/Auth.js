@@ -9,14 +9,10 @@ import {
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { authenticate } from "../../store/actions/auth";
 import { AuthOptions } from "../../constants/authOptions";
 import { Input } from "../../UI/Input";
-import withErrorHandler from "../../withErrorHandler/withErrorHandler";
 
 const Auth = () => {
-  const disptach = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,7 +28,7 @@ const Auth = () => {
     }),
     onSubmit: async (values) => {
       let url = `/api/users/${values.authMethod}`;
-      disptach(authenticate(url, values));
+      console.log(url);
     },
   });
 
@@ -89,4 +85,4 @@ const Auth = () => {
   );
 };
 
-export default withErrorHandler(Auth);
+export default Auth;

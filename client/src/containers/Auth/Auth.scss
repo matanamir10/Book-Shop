@@ -1,0 +1,15 @@
+@import '../../styles/mixins.scss';
+
+.auth {
+  height: 25rem;
+  width: 25rem;
+  max-width: 80%;
+  @include absCenter();
+
+  &__form {
+    padding: 1.6rem;
+  }
+  &__input {
+    margin: 1rem 0 !important;
+  }
+}
