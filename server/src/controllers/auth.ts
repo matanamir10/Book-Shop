@@ -45,6 +45,7 @@ export class AuthController {
       {
         id: existingUser.id,
         email: existingUser.email,
+        admin: existingUser.admin,
       },
       process.env.JWT_KEY!
     );
@@ -81,6 +82,7 @@ export class AuthController {
       {
         id: user.id,
         email: user.email,
+        admin: user.admin,
       },
       process.env.JWT_KEY!
     );
