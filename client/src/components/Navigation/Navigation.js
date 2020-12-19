@@ -35,9 +35,9 @@ export const Navigation = () => {
       <NavLink
         className="navigation__item"
         activeClassName="navigation__item--active"
-        to="/book-search"
+        to="/books-purchases"
       >
-        <span>Book Search</span>
+        <span>My Purchases</span>
       </NavLink>
       {showAdminRoutes}
       <Button
