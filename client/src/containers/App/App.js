@@ -9,11 +9,12 @@ import { Loading } from "../../UI/Loading/Loading";
 import { autoAuthenticate } from "../../store/actions/auth";
 
 const BookList = React.lazy(() => import("../../components/BookList/BookList"));
-const BookSearch = React.lazy(() =>
-  import("../../components/BookSearch/BookSearch")
-);
 const CreateBook = React.lazy(() =>
   import("../../components/CreateBook/CreateBook")
+);
+
+const BooksPurchases = React.lazy(() =>
+  import("../../components/BooksPurchases/BooksPurchases")
 );
 
 export const App = () => {
@@ -51,7 +52,7 @@ export const App = () => {
           <Switch>
             <Route path="/auth" component={Auth} />
             <Route path="/book-list" component={BookList} />
-            <Route path="/book-search" component={BookSearch} />
+            <Route path="/books-purchases" component={BooksPurchases} />
             {createBookPermmisions}
             <Redirect from="/" to="/book-list" />
           </Switch>
