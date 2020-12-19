@@ -10,6 +10,7 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   admin: boolean;
+  purchasedBooks: [];
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -32,6 +33,10 @@ const userSchema = new mongoose.Schema(
     admin: {
       type: Boolean,
       default: false,
+    },
+    purchasedBooks: {
+      type: [{ type: mongoose.Types.ObjectId, ref: "Book" }],
+      default: [],
     },
   },
   {

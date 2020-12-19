@@ -9,10 +9,18 @@ export const Navigation = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  let showAdminRoutes = null;
+  let links = (
+    <NavLink
+      className="navigation__item"
+      activeClassName="navigation__item--active"
+      to="/books-purchases"
+    >
+      <span>My Purchases</span>
+    </NavLink>
+  );
   console.log(user.admin);
   if (user.admin) {
-    showAdminRoutes = (
+    links = (
       <NavLink
         className="navigation__item"
         activeClassName="navigation__item--active"
@@ -32,14 +40,7 @@ export const Navigation = () => {
       >
         <span>Book List</span>
       </NavLink>
-      <NavLink
-        className="navigation__item"
-        activeClassName="navigation__item--active"
-        to="/books-purchases"
-      >
-        <span>My Purchases</span>
-      </NavLink>
-      {showAdminRoutes}
+      {links}
       <Button
         color="secondary"
         variant="contained"

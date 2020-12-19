@@ -5,6 +5,7 @@ export const SEARCH_BOOK = "search_book";
 export const CREATE_BOOK = "create_book";
 export const DELETE_BOOK = "delete_book";
 export const UPDATE_BOOK = "update_book";
+export const PURCHASE_BOOK = "purchase_book";
 
 // Maybe add pagination
 export const fetchBooks = () => {
@@ -70,4 +71,17 @@ export const searchBook = (search) => {
   };
 };
 
-// TODO: Do search action
+export const purchaseBook = (bookId) => {
+  console.log("bookId", bookId);
+  return async (dispatch) => {
+    return new Promise((resolve) => {
+      axios.post(`/api/books/purchase`, { bookId }).then(() => {
+        dispatch({
+          type: PURCHASE_BOOK,
+          bookId,
+        });
+        resolve();
+      });
+    });
+  };
+};

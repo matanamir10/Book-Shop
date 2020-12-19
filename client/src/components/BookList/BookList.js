@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./BookList.scss";
 import { Button } from "@material-ui/core";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBooks } from "../../store/actions/book";
+import { fetchBooks, purchaseBook } from "../../store/actions/book";
 import { BookSearch } from "../BookSearch/BookSearch";
-import { Book } from "./Book/Book";
+import Book from "./Book/Book";
 import DeleteBook from "../DeleteBook/DeleteBook";
 import UpdtaeBook from "../UpdtaeBook/UpdtaeBook";
+import withErrorHandler from "../../withErrorHandler/withErrorHandler";
 
 const BookList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState({
@@ -16,6 +18,12 @@ const BookList = () => {
   });
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.book);
+  const { user } = useSelector((state) => state.auth);
+
+  const handlePurchase = async (bookId) => {
+    await dispatch(purchaseBook(bookId));
+    toast.success("Book was purchased");
+  };
 
   const handleClose = () =>
     setShowDeleteModal({ visible: false, modalId: null, bookId: null });
@@ -52,10 +60,16 @@ const BookList = () => {
       </div>
       {books &&
         books.map((book) => (
-          <Book book={book} key={book.id} handleModals={handleModals} />
+          <Book
+            admin={user.admin}
+            book={book}
+            key={book.id}
+            handleModals={handleModals}
+            handlePurchase={handlePurchase}
+          />
         ))}
     </ul>
   );
 };
 
-export default BookList;
+export default withErrorHandler(BookList);

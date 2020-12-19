@@ -7,18 +7,20 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { ModalOptions } from "../../../constants/modalOptions";
 
-export const Book = ({ book, handleModals }) => {
-  const { user } = useSelector((state) => state.auth);
-
+const Book = ({ admin, book, handleModals, handlePurchase }) => {
   let actions = (
-    <Button size="small" color="primary">
+    <Button
+      size="small"
+      color="primary"
+      onClick={handlePurchase.bind(null, book.id)}
+    >
       Purchase
     </Button>
   );
-  if (user.admin) {
+
+  if (admin) {
     actions = (
       <>
         <Button
@@ -56,3 +58,4 @@ export const Book = ({ book, handleModals }) => {
     </li>
   );
 };
+export default Book;
