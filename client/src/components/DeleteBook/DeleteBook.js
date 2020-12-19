@@ -11,12 +11,14 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { deleteBook } from "../../store/actions/book";
 import withErrorHandler from "../../withErrorHandler/withErrorHandler";
+import { ModalOptions } from "../../constants/modalOptions";
 
 const DeleteBook = ({ details, handleClose }) => {
   const dispatch = useDispatch();
 
+  const { visible, modalId, bookId } = details;
   const handleDeleteMessage = async () => {
-    await dispatch(deleteBook(details.bookId));
+    await dispatch(deleteBook(bookId));
     handleClose();
     toast.info("Book was deleted", {
       autoClose: 3000,
@@ -24,14 +26,14 @@ const DeleteBook = ({ details, handleClose }) => {
   };
   return (
     <Dialog
-      open={details.visible}
+      open={visible && modalId === ModalOptions.BOOK_DELETE}
       onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      aria-labelledby="delete-book-dialog"
+      aria-describedby="delete-book-dialog"
     >
       <DialogTitle id="alert-dialog-title">Are you sure ?</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText id="delete-book-dialog">
           This book will be deleted
         </DialogContentText>
       </DialogContent>
