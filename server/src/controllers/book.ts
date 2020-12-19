@@ -10,7 +10,6 @@ import {
 } from "@overnightjs/core";
 import { Request, Response } from "express";
 import { body, param } from "express-validator";
-import jwt from "jsonwebtoken";
 import { validateRequest } from "../middlewares/validationError";
 import { requireAuth } from "./../middlewares/require-auth";
 import { BadRequestError } from "../errors/badRequest";
@@ -29,22 +28,17 @@ export class BookController {
 
   @Get("purchase")
   private async getPurchasesBooks(req: Request, res: Response) {
-    console.log("here");
     const id = req.currentUser?.id;
     const books = await User.findOne({ _id: id }).populate("purchasedBooks");
-    console.log("the books", books);
     res.status(200).send(books ? books.purchasedBooks : []);
   }
 
   @Get(":bookSearch")
   private async searchBooks(req: Request, res: Response) {
     const { bookSearch } = req.params;
-    // TODO: need to search by book
-    console.log(bookSearch);
     const books = await Book.find({
       book: { $regex: `.*${bookSearch}.*` },
     });
-    console.log(books);
     res.status(200).send(books);
   }
 
@@ -75,13 +69,11 @@ export class BookController {
     if (!currentUser) {
       throw new BadRequestError("Cannot find user");
     }
-    console.log(currentUser.purchasedBooks);
     const isInArray = currentUser.purchasedBooks.some(function (
       book: mongoose.Types.ObjectId
     ) {
       return book.equals(bookId);
     });
-    console.log(isInArray);
     if (isInArray) {
       throw new Error("You have already purchased this book");
     }
@@ -104,7 +96,6 @@ export class BookController {
   ])
   private async deleteBook(req: Request, res: Response) {
     const { bookId } = req.params;
-    console.log("book id", bookId);
     const doc = await Book.findOneAndRemove({ _id: bookId });
     res.send(doc ? "Book was deleted sucessufly" : {});
   }

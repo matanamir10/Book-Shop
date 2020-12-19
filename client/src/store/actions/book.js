@@ -34,7 +34,6 @@ export const createBook = (book) => {
 };
 
 export const deleteBook = (bookId) => {
-  console.log("bookId", bookId);
   return async (dispatch) => {
     return new Promise((resolve) => {
       axios.delete(`/api/books/${bookId}`).then(() => {
@@ -73,7 +72,6 @@ export const searchBook = (search) => {
 };
 
 export const purchaseBook = (bookId) => {
-  console.log("bookId", bookId);
   return async (dispatch) => {
     return new Promise((resolve) => {
       axios.post(`/api/books/purchase`, { bookId }).then(() => {

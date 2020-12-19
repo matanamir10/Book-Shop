@@ -18,7 +18,6 @@ export const Navigation = () => {
       <span>My Purchases</span>
     </NavLink>
   );
-  console.log(user.admin);
   if (user.admin) {
     links = (
       <NavLink

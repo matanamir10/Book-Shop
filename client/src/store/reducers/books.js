@@ -28,8 +28,6 @@ export const bookReducer = (state = initalState, action) => {
       const { id } = action.updatedBook;
       const copyBooks = [...state.books];
       const updtaedBookIndex = copyBooks.findIndex((book) => book.id === id);
-      console.log(copyBooks, updtaedBookIndex);
-      console.log(action.updatedBook);
       copyBooks[updtaedBookIndex] = action.updatedBook;
       return {
         ...state,
