@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
-export const Book = ({ book }) => {
+export const Book = ({ book, handleDelete }) => {
   const { user } = useSelector((state) => state.auth);
 
   let actions = (
@@ -23,7 +23,11 @@ export const Book = ({ book }) => {
         <Button size="small" color="primary">
           Update
         </Button>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={handleDelete.bind(null, book.id)}
+        >
           Delete
         </Button>
       </>
