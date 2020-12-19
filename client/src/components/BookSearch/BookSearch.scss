@@ -1,8 +1,10 @@
+@import ".../../../../styles/mixins.scss";
+
 .book-search {
+  @include flexCenter(row);
   height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-gap: 2rem;
-  justify-content: center;
-  padding: 2rem;
+
+  &__cta {
+    margin: 0 1.6rem;
+  }
 }
