@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./BookList.scss";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,15 @@ const BookList = () => {
   const getBooks = () => {
     dispatch(fetchBooks());
   };
+
+  useEffect(() => {
+    getBooks();
+  }, []);
   return (
     <ul className="book-list">
-      <Button>Show More</Button>
+      <Button onClick={getBooks} variant="contained">
+        Show More
+      </Button>
       {books && books.map((book) => <Book book={book} key={book.id} />)}
     </ul>
   );
