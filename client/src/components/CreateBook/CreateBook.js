@@ -24,6 +24,7 @@ const CreateBook = () => {
     }),
     onSubmit: async (bookValues) => {
       await dispatch(createBook(bookValues));
+      formik.resetForm();
       toast.success("Book was created", { autoClose: 3000 });
     },
   });
