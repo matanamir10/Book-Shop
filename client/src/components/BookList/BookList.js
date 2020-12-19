@@ -3,6 +3,7 @@ import "./BookList.scss";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../store/actions/book";
+import { BookSearch } from "../BookSearch/BookSearch";
 import { Book } from "./Book/Book";
 
 const BookList = () => {
@@ -18,9 +19,12 @@ const BookList = () => {
   }, []);
   return (
     <ul className="book-list">
-      <Button onClick={getBooks} variant="contained">
-        Show More
-      </Button>
+      <div className="book-list__actions">
+        <BookSearch />
+        <Button onClick={getBooks} variant="contained" color="secondary">
+          Show More
+        </Button>
+      </div>
       {books && books.map((book) => <Book book={book} key={book.id} />)}
     </ul>
   );
