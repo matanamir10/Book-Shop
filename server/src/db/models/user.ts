@@ -9,6 +9,7 @@ interface UserAttrs {
 interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  admin: boolean;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -27,6 +28,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
       maxlength: 20,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
     },
   },
   {
