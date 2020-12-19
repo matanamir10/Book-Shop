@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import "./BookSearch.scss";
-import {
-  InputLabel,
-  IconButton,
-  InputAdornment,
-  Button,
-} from "@material-ui/core";
-import { Visibility } from "@material-ui/icons";
+import { Button } from "@material-ui/core";
 import { Input } from "../../UI/Input";
 
 export const BookSearch = () => {
@@ -18,7 +12,7 @@ export const BookSearch = () => {
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="search books"
+        placeholder="search book name"
       />
       <Button className="book-search__cta" color="primary" variant="contained">
         Search Book
