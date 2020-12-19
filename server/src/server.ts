@@ -8,6 +8,7 @@ import { Server } from "@overnightjs/core";
 import { errorHandler } from "./middlewares/errorHandler";
 import { AuthController } from "./controllers/auth";
 import { AppLogger } from "./models/Logger";
+import { BookController } from "./controllers/book";
 
 export class ServerApp extends Server {
   constructor() {
@@ -29,7 +30,8 @@ export class ServerApp extends Server {
 
   private setupControllers(): void {
     const authController = new AuthController();
-    super.addControllers(authController);
+    const booksController = new BookController();
+    super.addControllers([authController, booksController]);
   }
 
   public start(port: number): void {
