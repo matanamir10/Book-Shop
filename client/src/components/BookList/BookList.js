@@ -6,20 +6,22 @@ import { fetchBooks } from "../../store/actions/book";
 import { BookSearch } from "../BookSearch/BookSearch";
 import { Book } from "./Book/Book";
 import DeleteBook from "../DeleteBook/DeleteBook";
+import UpdtaeBook from "../UpdtaeBook/UpdtaeBook";
 
 const BookList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState({
     visible: false,
+    modalId: null,
     bookId: null,
   });
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.book);
 
   const handleClose = () =>
-    setShowDeleteModal({ visible: false, bookId: null });
+    setShowDeleteModal({ visible: false, modalId: null, bookId: null });
 
-  const handleDelete = (bookId) => {
-    setShowDeleteModal({ visible: true, bookId });
+  const handleModals = (modalId, bookId) => {
+    setShowDeleteModal({ visible: true, modalId, bookId });
   };
 
   const getBooks = () => {
@@ -29,18 +31,28 @@ const BookList = () => {
   useEffect(() => {
     getBooks();
   }, []);
+
+  let modals = null;
+  if (showDeleteModal.modalId) {
+    modals = (
+      <>
+        <DeleteBook details={showDeleteModal} handleClose={handleClose} />
+        <UpdtaeBook details={showDeleteModal} handleClose={handleClose} />
+      </>
+    );
+  }
   return (
     <ul className="book-list">
-      <DeleteBook details={showDeleteModal} handleClose={handleClose} />
+      {modals}
       <div className="book-list__actions">
         <BookSearch />
         <Button onClick={getBooks} variant="contained" color="secondary">
-          Show More
+          Refresh
         </Button>
       </div>
       {books &&
         books.map((book) => (
-          <Book book={book} key={book.id} handleDelete={handleDelete} />
+          <Book book={book} key={book.id} handleModals={handleModals} />
         ))}
     </ul>
   );

@@ -8,8 +8,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { ModalOptions } from "../../../constants/modalOptions";
 
-export const Book = ({ book, handleDelete }) => {
+export const Book = ({ book, handleModals }) => {
   const { user } = useSelector((state) => state.auth);
 
   let actions = (
@@ -20,13 +21,17 @@ export const Book = ({ book, handleDelete }) => {
   if (user.admin) {
     actions = (
       <>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={handleModals.bind(null, ModalOptions.BOOK_UPDATE, book.id)}
+        >
           Update
         </Button>
         <Button
           size="small"
           color="primary"
-          onClick={handleDelete.bind(null, book.id)}
+          onClick={handleModals.bind(null, ModalOptions.BOOK_DELETE, book.id)}
         >
           Delete
         </Button>
