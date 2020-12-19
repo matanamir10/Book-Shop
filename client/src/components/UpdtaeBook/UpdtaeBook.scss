@@ -1,0 +1,16 @@
+@import "../../styles/mixins.scss";
+
+.update-book {
+  @include flexCenter(column);
+
+  &__content {
+    height: 100%;
+  }
+
+  &__form {
+    @include flexCenter(column);
+  }
+  &__input {
+    margin: 1rem 0;
+  }
+}

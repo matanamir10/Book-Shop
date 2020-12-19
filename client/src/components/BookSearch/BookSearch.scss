@@ -1,0 +1,10 @@
+@import ".../../../../styles/mixins.scss";
+
+.book-search {
+  @include flexCenter(row);
+  height: 100%;
+
+  &__cta {
+    margin: 0 1.6rem;
+  }
+}

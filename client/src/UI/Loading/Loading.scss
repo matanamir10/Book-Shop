@@ -1,0 +1,8 @@
+@import "../../styles/mixins.scss";
+
+.loading-container {
+  height: 100vh;
+  & > div:first-child {
+    @include absCenter;
+  }
+}

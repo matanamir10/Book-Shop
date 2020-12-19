@@ -1,0 +1,54 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.navigation {
+  background-color: $header-color;
+  @include flexCenter;
+
+  &__user-text {
+    font-size: 1.2rem;
+    color: $color-primary;
+    margin-right: 2.5rem;
+    text-decoration: underline;
+  }
+  &__item {
+    text-transform: capitalize;
+    text-decoration: none;
+    color: $header-link-color;
+    position: relative;
+    padding: 0.8rem 1.4rem;
+
+    & > span {
+      color: $header-link-color;
+      position: relative;
+      z-index: 10;
+      font-size: 1.2rem;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      border-radius: 0.3rem;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 3px;
+      background-color: $color-primary;
+      transform: scaleY(0);
+      transition: transform 0.5s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.2s,
+        background-color 0.1s;
+    }
+
+    &:not(:last-child) {
+      margin-right: 2.5rem;
+    }
+  }
+
+  &__item:active::before {
+    background-color: $color-primary-dark;
+  }
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+}

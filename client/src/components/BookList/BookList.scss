@@ -1,0 +1,14 @@
+@import "../../styles/mixins.scss";
+
+.book-list {
+  height: 100%;
+  @include flexCenter(column);
+  justify-content: flex-start;
+  list-style: none;
+  padding: 1.2rem;
+
+  &__actions {
+    @include flexCenter();
+    margin: 2.5rem 0;
+  }
+}
