@@ -9,7 +9,7 @@ export const UPDATE_BOOK = "update_book";
 // Maybe add pagination
 export const fetchBooks = () => {
   return async (dispatch) => {
-    const { data: books } = await axios.get("/books");
+    const { data: books } = await axios.get("/api/books");
     dispatch({
       type: FETCH_BOOKS,
       books,
@@ -20,10 +20,10 @@ export const fetchBooks = () => {
 export const createBook = (book) => {
   return async (dispatch) => {
     return new Promise((resolve) => {
-      axios.post("/books/create", book).then((data) => {
+      axios.post("/api/books/create", book).then(({ data: book }) => {
         dispatch({
           type: CREATE_BOOK,
-          book: data.newBook,
+          book,
         });
         resolve();
       });
@@ -33,7 +33,7 @@ export const createBook = (book) => {
 
 export const deleteBook = (bookId) => {
   return async (dispatch) => {
-    await axios.post("/books/delete", bookId);
+    await axios.post("/api/books/delete", bookId);
     dispatch({
       type: DELETE_BOOK,
       bookId,
