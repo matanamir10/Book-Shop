@@ -21,5 +21,12 @@ export const App = () => {
     }
   }, [auth]);
 
-  return <div>App</div>;
+  let app = (
+    <>
+      <Route component={Auth} />
+      <Redirect from="/" to="/auth" />
+    </>
+  );
+
+  return <div className="container">{app}</div>;
 };
