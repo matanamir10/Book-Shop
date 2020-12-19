@@ -46,14 +46,28 @@ export const deleteBook = (bookId) => {
   };
 };
 
-// export const updateBook = (newBook) => {
-//   return async (dispatch) => {
-//     const { data: updatedBook } = await axios.post("/books/update", newBook);
-//     dispatch({
-//       type: UPDATE_BOOK,
-//       updatedBook,
-//     });
-//   };
-// };
+export const updateBook = (newBook) => {
+  return async (dispatch) => {
+    return new Promise((resolve) => {
+      axios.patch("/api/books", newBook).then(({ data }) => {
+        dispatch({
+          type: UPDATE_BOOK,
+          updatedBook: data,
+        });
+      });
+      resolve();
+    });
+  };
+};
+
+export const searchBook = (search) => {
+  return async (dispatch) => {
+    const { data: searchedBooks } = await axios.get(`/api/books/${search}`);
+    dispatch({
+      type: SEARCH_BOOK,
+      searchedBooks,
+    });
+  };
+};
 
 // TODO: Do search action
