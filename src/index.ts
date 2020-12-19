@@ -11,7 +11,7 @@ if (!process.env.MONGO_URI || !process.env.JWT_KEY) {
 
 const run = async () => {
   await connectToDB();
-  AppLogger.getLogger().info(`Connected to mongodb`);
+  AppLogger.getLogger().info(`Connected to mongodb successfuly`);
   const port = parseInt(process.env.PORT!) || 4000;
   new ServerApp().start(port);
 };
