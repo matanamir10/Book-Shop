@@ -8,6 +8,20 @@ import { signOut } from "../../store/actions/auth";
 export const Navigation = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  let showAdminRoutes = null;
+  console.log(user.admin);
+  if (user.admin) {
+    showAdminRoutes = (
+      <NavLink
+        className="navigation__item"
+        activeClassName="navigation__item--active"
+        to="/create-book"
+      >
+        <span>Create Book</span>
+      </NavLink>
+    );
+  }
   return (
     <nav className="navigation">
       <p className="navigation__user-text">Hello, {user.email}</p>
@@ -25,6 +39,7 @@ export const Navigation = () => {
       >
         <span>Book Search</span>
       </NavLink>
+      {showAdminRoutes}
       <Button
         color="secondary"
         variant="contained"
