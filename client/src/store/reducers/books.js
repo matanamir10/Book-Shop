@@ -4,6 +4,7 @@ import {
   DELETE_BOOK,
   UPDATE_BOOK,
   SEARCH_BOOK,
+  updateBook,
 } from "../actions/book";
 
 const initalState = {
@@ -20,6 +21,16 @@ export const bookReducer = (state = initalState, action) => {
       return {
         books: [...state.books].filter((book) => book.id !== action.bookId),
       };
+    case UPDATE_BOOK:
+      const { id } = action.updatedBook;
+      const copyBooks = [...state.books];
+      const updtaedBookIndex = copyBooks.findIndex((book) => book.id === id);
+      copyBooks[updtaedBookIndex] = action.updatedBook;
+      return {
+        books: copyBooks,
+      };
+    case SEARCH_BOOK:
+      return { books: action.searchedBooks };
     default:
       return state;
   }
