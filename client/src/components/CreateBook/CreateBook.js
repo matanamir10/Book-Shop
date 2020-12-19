@@ -18,7 +18,7 @@ const CreateBook = () => {
       publisher: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
-      let url = `/api/book/create`;
+      let url = `/api/books/create`;
       alert(values);
     },
   });
