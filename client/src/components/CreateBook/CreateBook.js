@@ -3,9 +3,14 @@ import "./CreateBook.scss";
 import { Paper, Button } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { createBook } from "../../store/actions/book";
 import { Input } from "../../UI/Input";
 
 const CreateBook = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       book: "",
@@ -17,9 +22,9 @@ const CreateBook = () => {
       author: Yup.string().required("Required"),
       publisher: Yup.string().required("Required"),
     }),
-    onSubmit: async (values) => {
-      let url = `/api/books/create`;
-      alert(values);
+    onSubmit: async (bookValues) => {
+      await dispatch(createBook(bookValues));
+      toast.success("Book was created", { autoClose: 3000 });
     },
   });
   return (
