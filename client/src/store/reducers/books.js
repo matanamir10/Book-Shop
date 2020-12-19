@@ -5,6 +5,7 @@ import {
   UPDATE_BOOK,
   SEARCH_BOOK,
   PURCHASE_BOOK,
+  FETCH_PURCHASED_BOOK,
 } from "../actions/book";
 
 const initalState = {
@@ -36,13 +37,9 @@ export const bookReducer = (state = initalState, action) => {
       return { ...state, books: action.searchedBooks };
 
     case PURCHASE_BOOK:
-      const purchasedBook = [...state.books].find(
-        (book) => (book.id = action.bookId)
-      );
-      return {
-        ...state,
-        purchaseBook: [...state.purchaseBook, purchasedBook],
-      };
+      return state;
+    case FETCH_PURCHASED_BOOK:
+      return { ...state, purchaseBook: action.purchasedBooks };
     default:
       return state;
   }

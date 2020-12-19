@@ -27,13 +27,22 @@ export class BookController {
     res.status(200).send(books);
   }
 
+  @Get("purchase")
+  private async getPurchasesBooks(req: Request, res: Response) {
+    console.log("here");
+    const id = req.currentUser?.id;
+    const books = await User.findOne({ _id: id }).populate("purchasedBooks");
+    console.log("the books", books);
+    res.status(200).send(books ? books.purchasedBooks : []);
+  }
+
   @Get(":bookSearch")
   private async searchBooks(req: Request, res: Response) {
     const { bookSearch } = req.params;
     // TODO: need to search by book
     console.log(bookSearch);
     const books = await Book.find({
-      publisher: { $regex: `.*${bookSearch}.*` },
+      book: { $regex: `.*${bookSearch}.*` },
     });
     console.log(books);
     res.status(200).send(books);
