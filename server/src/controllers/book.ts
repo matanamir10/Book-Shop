@@ -5,9 +5,10 @@ import {
   Middleware,
   Get,
   Post,
+  Delete,
 } from "@overnightjs/core";
 import { Request, Response } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import jwt from "jsonwebtoken";
 import { validateRequest } from "../middlewares/validationError";
 import { BadRequestError } from "../errors/badRequest";
@@ -17,7 +18,7 @@ import { Book } from "../db/models/book";
 @Controller("api/books")
 @ClassMiddleware([currentUser, requireAuth])
 export class BookController {
-  @Get("")
+  @Get()
   private async getBooks(req: Request, res: Response) {
     const books = await Book.find();
     res.status(200).send(books);
@@ -37,5 +38,17 @@ export class BookController {
     await newBook.save();
 
     res.status(201).send(newBook);
+  }
+
+  @Delete(":bookId")
+  @Middleware([
+    param("bookId").isString().withMessage("BookId must be provided"),
+    validateRequest,
+  ])
+  private async deleteBook(req: Request, res: Response) {
+    const { bookId } = req.params;
+    console.log("book id", bookId);
+    const doc = await Book.findOneAndRemove({ _id: bookId });
+    res.send(doc ? "Book was deleted sucessufly" : {});
   }
 }
