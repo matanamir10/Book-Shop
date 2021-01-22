@@ -10,10 +10,10 @@ const withErrorHandler = (WrappedComponent) => {
       <div>
         <Dialog
           onClose={clearError}
-          aria-labelledby="error-modal-title"
+          aria-labelledby='error-modal-title'
           open={error}
         >
-          <DialogTitle id="error-modal">Error occured: {error}</DialogTitle>
+          <DialogTitle id='error-modal'>Error occured: {error}</DialogTitle>
         </Dialog>
         <WrappedComponent {...props} />
       </div>

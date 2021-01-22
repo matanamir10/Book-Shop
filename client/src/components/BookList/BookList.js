@@ -50,11 +50,11 @@ const BookList = () => {
     );
   }
   return (
-    <ul className="book-list">
+    <ul className='book-list'>
       {modals}
-      <div className="book-list__actions">
+      <div className='book-list__actions'>
         <BookSearch />
-        <Button onClick={getBooks} variant="contained" color="secondary">
+        <Button onClick={getBooks} variant='contained' color='secondary'>
           Refresh
         </Button>
       </div>
