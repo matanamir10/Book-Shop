@@ -48,7 +48,7 @@ export class ServerApp extends Server {
 
   public start(port: number): void {
     this.app.listen(port, () => {
-      AppLogger.getLogger().info(`App running on port: ${port}`);
+      AppLogger.getLogger().info(`App running on port: ${port}!!!`);
     });
   }
 }
